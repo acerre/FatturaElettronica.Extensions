@@ -1,17 +1,32 @@
-﻿# FatturaElettronica.Extensions [![Build status](https://ci.appveyor.com/api/projects/status/sp1ux45txvug7ujp?svg=true)](https://ci.appveyor.com/project/nicolaiarocci/fatturaelettronica-extensions) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=FatturaElettronica/FatturaElettronica.Extensions)](https://dependabot.com)
+﻿# FatturaElettronica.Extensions [![Build Status](https://dev.azure.com/FatturaElettronicaNET/FatturaElettronica.Extensions/_apis/build/status/FatturaElettronica.FatturaElettronica.Extensions?branchName=master)](https://dev.azure.com/FatturaElettronicaNET/FatturaElettronica.Extensions/_build/latest?definitionId=3&branchName=master) [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=FatturaElettronica/FatturaElettronica.Extensions)](https://dependabot.com)
 
 Estensioni per [FatturaElettronica.NET][fe]
 
 ## Caratteristiche
+
+### Lettura XML
 
 - `ReadXml(string filePath)`: deserializza da file XML;
 - `ReadXml(Stream stream)`: deserializza da stream;
 - `ReadXmlSigned(string filePath)`: deserializza da XML firmato con algoritmo CADES (.p7m). Supporta anche file codificati Base64;
 - `ReadXmlSigned(Stream stream)`: deserializza da stream firmato con algoritmo CADES (.p7m). Supporta anche file codificati Base64;
 - `ReadXmlSignedBase64(string filePath)`: consigliato quando si sa in anticipo che il file è codificato Base64;
+
+### Scrittura XML
+
 - `WriteXml(string filePath)`: serializza su file XML non firmato;
 - `WriteXmlSigned(string pfxFile, string pfxPassword, string p7mFilePath)`: serializza su file XML, firmando con algoritmo CADES (.p7m);
+
+### Scrittura HTML
+
+- `WriteHtml(string outPath, string xslPath)`: crea un HTML con rappresentazione della fattura, usando un foglio di stile;
+
+### JSON
+
 - `FromJson(string json)`: deserializza da JSON;
+
+### Altro
+
 - `FatturaElettronicaFileNameGenerator`: classe per la generazione di nomi file conformi allo standard fattura elettronica.
 
 ## Utilizzo
@@ -53,6 +68,10 @@ namespace DemoApp
 
             // Scrive direttamente su XML (senza necessità passare uno stream)
             fattura.WriteXml("Copia di IT02182030391_31.xml");
+
+            // Crea HTML della fattura. Usa foglio di stile PA
+            // (https://www.fatturapa.gov.it/export/fatturazione/sdi/fatturapa/v1.2.1/fatturaPA_v1.2.1.xsl)
+            fattura.WriteHtml("fattura.htm", "fatturaPA_v1.2.1.xsl");
 
             // Serializza fattura in JSON.
             var json = fattura.ToJson();
@@ -114,7 +133,7 @@ Oppure usare il comando equivalente nella UI di Visual Studio.
 ## Licenza
 
 FatturaElettronica è un progetto open source di [Nicola Iarocci][ni] e [Gestionale Amica][ga] rilasciato sotto licenza [BSD][bsd].
-BouncyCastle, Copyright (c) 2000 - 2017 The Legion of the Bouncy Castle Inc. ([licenza][bc]
+BouncyCastle, Copyright (c) 2000 - 2017 The Legion of the Bouncy Castle Inc. ([licenza][bc]).
 
 [fe]: http://github.com/FatturaElettronica/FatturaElettronica.NET
 [bsd]: http://github.com/FatturaElettronica/FatturaElettronica.Extensions/blob/master/LICENSE

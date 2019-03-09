@@ -1,4 +1,4 @@
-using FatturaElettronica;
+﻿using FatturaElettronica;
 using FatturaElettronica.Extensions;
 using FatturaElettronica.Defaults;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +10,7 @@ using System;
 namespace Test
 {
     [TestClass]
-    public class FatturaElettronicaSignedFileExtensionTest
+    public class FatturaElettronicaSignedFileExtensionsTest
     {
         // TODO: test that invalid signature is reported as a FatturaElettronicaSignatureException.
 
